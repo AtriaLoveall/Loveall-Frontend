@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiSearch, FiMenu, FiX } from 'react-icons/fi';
 
-const Header = () => {
+export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -60,6 +60,4 @@ const Header = () => {
       )}
     </header>
   );
-};
-
-export default Header;
+}
