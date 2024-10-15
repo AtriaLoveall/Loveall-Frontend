@@ -9,8 +9,8 @@ export default function App() {
   return (
     <PopUpProvider>
       <Header />
-      {/* <AppRoute />
-      <Footer /> */}
+      <AppRoute />
+      <Footer />
     </PopUpProvider>
   );
 }

@@ -1,15 +1,30 @@
 import React, { useState, useContext } from "react";
 import { FiSearch, FiMenu, FiX } from "react-icons/fi";
 import PopUpContext from "../context/PopUpContext";
+import useAuth from "../hooks/useAuth";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setShowLoginPopup } = useContext(PopUpContext);
+  const {isAuthenticated, logout} = useAuth();
+  console.log("Authentication: " + isAuthenticated);
 
   const handlePopUp = () => {
-    console.log("Show the PopUp")
+    console.log("Show the PopUp after 10s")
     setShowLoginPopup(true);
   };
+
+  const handleMobileMenu = () => {
+    console.log("Mobile Menu button is opened");
+    setIsMenuOpen(!isMenuOpen);
+  }
+
+  const handleLogout = () => {
+    console.log("Logging out successfully");
+    logout();
+  }
+
+  
   return (
     <header className="bg-[#71012D] text-white p-4 relative">
       <div className="container mx-auto flex justify-between items-center">
@@ -52,23 +67,30 @@ export default function Header() {
               size={18}
             />
           </div>
-          <button
+          
+          {!isAuthenticated ? <button
             type="button"
             onClick={handlePopUp}
             className="bg-[#FF6B98] text-white px-4 py-1 rounded-full text-sm hover:bg-[#FF8CAF] cursor-pointer"
           >
             Login/Sign Up
-          </button>
+          </button> : <button type="button"
+            onClick={() => {
+              handleLogout();
+              handlePopUp();
+            }}
+            className="bg-[#FF6B98] text-white px-4 py-1 rounded-full text-sm hover:bg-[#FF8CAF] cursor-pointer">Logout</button>
+          }
         </div>
         <button
           className="lg:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={handleMobileMenu}
         >
           {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
       </div>
       {isMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-[#71012D] p-4">
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-[#71012D] p-4 z-30">
           <nav className="mb-4">
             <ul className="space-y-2">
               <li>
@@ -104,13 +126,22 @@ export default function Header() {
               size={18}
             />
           </div>
-          <button
+          {!isAuthenticated ? <button
             type="button"
             onClick={handlePopUp}
             className="bg-[#FF6B98] text-white px-4 py-1 rounded-full text-sm w-full hover:bg-[#FF8CAF]"
           >
             Login/Sign Up
-          </button>
+          </button> : <button
+            type="button"
+            onClick={() => {
+              handleLogout();
+              handlePopUp();
+            }}
+            className="bg-[#FF6B98] text-white px-4 py-1 rounded-full text-sm w-full hover:bg-[#FF8CAF]"
+          >
+            Logout
+          </button>}
         </div>
       )}
     </header>

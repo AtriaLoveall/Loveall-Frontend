@@ -8,10 +8,12 @@ import Enquiry from '../components/Enquiry';
 import { FiStar, FiShoppingBag, FiShoppingCart, FiCoffee, FiFilm, FiMap, FiMoreHorizontal } from 'react-icons/fi';
 import Login from '../components/Login';
 import PopUpContext from '../context/PopUpContext';
+import useAuth from '../hooks/useAuth';
 
 export default function Home() {
-  
+  const {isAuthenticated} = useAuth();
   const {showLoginPopup, setShowLoginPopup} = useContext(PopUpContext)
+  console.log("Authentication: " + isAuthenticated);
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!showLoginPopup) {
@@ -19,11 +21,11 @@ export default function Home() {
       }
     }, 10000);
     return () => clearTimeout(timer);
-  }, [showLoginPopup])
+  }, [showLoginPopup, setShowLoginPopup])
   return (
     <>
-      <div className="w-screen h-screen flex justify-center items-center fixed inset-0 z-[20]">
-        {showLoginPopup && <Login className="bg-white"/>} 
+      <div className="w-screen h-screen flex justify-center items-center fixed top-[60px] z-[20]">
+        {showLoginPopup && !isAuthenticated && <Login className="bg-white"/>} 
       </div>
       <div className="min-h-screen flex flex-col font-poppins">
         <div className="bg-gradient-to-b from-[#71012D] to-[#971132] relative overflow-hidden">

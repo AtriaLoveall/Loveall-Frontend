@@ -5,7 +5,10 @@ import { faGoogle, faFacebook, faApple } from "@fortawesome/free-brands-svg-icon
 import logoImage from "../assets/images/Logo.jpeg";
 import { Link } from "react-router-dom";
 import PopUpContext from "../context/PopUpContext";
+import useAuth from "../hooks/useAuth";
+
 const Login = ({className}) => {
+  const {login} = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -13,6 +16,14 @@ const Login = ({className}) => {
   const handlePopUp = () => {
     console.log("Pop up closed")
     setShowLoginPopup(false);
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const {message, redirectTo, error} = await login({email, password, rememberMe});
+    if (!error) {
+      handlePopUp();
+    }
+    console.log(message, redirectTo);
   }
 
   return (
@@ -25,7 +36,7 @@ const Login = ({className}) => {
           <img src={logoImage} alt="LOVE ALL Logo" className="h-16 w-auto" />
         </div>
       </div>
-      <form className="mt-8 space-y-6">
+      <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <div className="rounded-md space-y-4">
           <div>
             <input
