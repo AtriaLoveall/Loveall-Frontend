@@ -1,36 +1,62 @@
-import React, {useState, useContext} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { X } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle, faFacebook, faApple } from "@fortawesome/free-brands-svg-icons";
+import {
+  faGoogle,
+  faFacebook,
+  faApple,
+} from "@fortawesome/free-brands-svg-icons";
 import logoImage from "../assets/images/Logo.jpeg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PopUpContext from "../context/PopUpContext";
-import useAuth from "../hooks/useAuth";
+import { useAuth } from "../hooks/useAuth";
 
-const Login = ({className}) => {
-  const {login} = useAuth();
+const Login = ({ className }) => {
+  const { login } = useAuth();
+  const [loginWithPassword, setLoginWithPassword ] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [otp, setOtp] = useState(null);
   const [rememberMe, setRememberMe] = useState(false);
-  const {setShowLoginPopup} = useContext(PopUpContext);
+  const [message, setMessage] = useState("");
+  const { setShowLoginPopup } = useContext(PopUpContext);
+  const navigate = useNavigate();
+
   const handlePopUp = () => {
-    console.log("Pop up closed")
+    console.log("Pop up closed");
     setShowLoginPopup(false);
-  }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const {message, redirectTo, error} = await login({email, password, rememberMe});
-    if (!error) {
+    const { message, redirectTo, success } = await login({
+      email,
+      password,
+      rememberMe,
+    });
+    setMessage(message);
+    if (success) {
       handlePopUp();
     }
-    console.log(message, redirectTo);
+  };
+
+  const handleLoginType = () => {
+    setLoginWithPassword((prev) => !prev)
+    console.log("Handle login type")
   }
 
   return (
-    <div className={"max-w-md w-full space-y-8 border border-gray-300 rounded-lg p-8 box-border shadow-lg " + className}>
+    <div
+      className={
+        "max-w-md w-full space-y-8 border border-gray-300 rounded-lg p-8 box-border shadow-lg " +
+        className
+      }
+    >
       <div className="relative">
-        <button onClick={handlePopUp} className="absolute top-0 right-0 text-gray-400 hover:text-gray-600" >
-            <X />
+        <button
+          onClick={handlePopUp}
+          className="absolute top-0 right-0 text-gray-400 hover:text-gray-600"
+        >
+          <X />
         </button>
         <div className="flex justify-center">
           <img src={logoImage} alt="LOVE ALL Logo" className="h-16 w-auto" />
@@ -52,17 +78,19 @@ const Login = ({className}) => {
             />
           </div>
           <div>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="current-password"
-              required
-              className="appearance-none rounded-full relative block w-full px-5 py-4 border border-gray-700 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 focus:z-10 sm:text-sm font-medium"
-              placeholder="PASSWORD"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            {loginWithPassword && (
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+                className="appearance-none rounded-full relative block w-full px-5 py-4 border border-gray-700 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 focus:z-10 sm:text-sm font-medium"
+                placeholder="PASSWORD"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            )}
           </div>
         </div>
 
@@ -96,15 +124,15 @@ const Login = ({className}) => {
           </button>
         </div>
       </form>
-
+      {message && <p>{message}</p>}
       <div className="mt-6 text-center">
-        <span className="text-sm text-black underline font-medium">
-          Log in with OTP
-        </span>
+        <button type="button" onClick={handleLoginType} className="text-sm text-black underline font-medium">
+          {loginWithPassword ? "Log in with OTP" : "Log in with Password"}
+        </button>
         <p className="mt-2 text-xs text-black font-medium">or SIGN UP with</p>
         <div className="mt-4 flex justify-center space-x-6">
           <a href="google.com" className="text-2xl">
-            <FontAwesomeIcon icon={faGoogle} style={{ color: "#4285F4" }}/>
+            <FontAwesomeIcon icon={faGoogle} style={{ color: "#4285F4" }} />
           </a>
           <a href="google.com" className="text-2xl">
             <FontAwesomeIcon icon={faFacebook} style={{ color: "#1877F2" }} />

@@ -8,20 +8,20 @@ import Enquiry from '../components/Enquiry';
 import { FiStar, FiShoppingBag, FiShoppingCart, FiCoffee, FiFilm, FiMap, FiMoreHorizontal } from 'react-icons/fi';
 import Login from '../components/Login';
 import PopUpContext from '../context/PopUpContext';
-import useAuth from '../hooks/useAuth';
+import {useAuth} from '../hooks/useAuth';
 
 export default function Home() {
   const {isAuthenticated} = useAuth();
   const {showLoginPopup, setShowLoginPopup} = useContext(PopUpContext)
   console.log("Authentication: " + isAuthenticated);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!showLoginPopup) {
-        setShowLoginPopup(true);
-      }
-    }, 10000);
-    return () => clearTimeout(timer);
-  }, [showLoginPopup, setShowLoginPopup])
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     if (!showLoginPopup) {
+  //       setShowLoginPopup(true);
+  //     }
+  //   }, 3000);
+  //   return () => clearTimeout(timer);
+  // }, [showLoginPopup, setShowLoginPopup])
   return (
     <>
       <div className="w-screen h-screen flex justify-center items-center fixed top-[60px] z-[20]">

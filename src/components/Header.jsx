@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { FiSearch, FiMenu, FiX } from "react-icons/fi";
 import PopUpContext from "../context/PopUpContext";
-import useAuth from "../hooks/useAuth";
+import {useAuth} from "../hooks/useAuth";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
