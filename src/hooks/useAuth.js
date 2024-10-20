@@ -38,8 +38,39 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
+  const register = async (payload) => {
+    const registerApi = api + "/auth/register";
+    try {
+      const response = await fetch(registerApi, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          first_name: payload.first_name,
+          last_name: payload.last_name,
+          email: payload.email,
+          phone_number: payload.phone_number,
+          password: payload.password,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Registration successful:', data);
+        // navigate('/registration2');
+      } else {
+        const errorData = await response.json();
+        alert(`Registration failed: ${errorData.message}`);
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+      alert('An error occurred during registration. Please try again.');
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, register }}>
       {children}
     </AuthContext.Provider>
   );

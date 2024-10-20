@@ -19,7 +19,6 @@ code {
 
 .bg-gradient-to-b {
   position: relative;
-  min-height: calc(100vh - 0.25rem);
 }
 
 #wave {
@@ -80,4 +79,14 @@ code {
   .bg-gradient-to-b {
     min-height: calc(110vh - 0.25rem);
   }
+}
+
+.no-scrollbar {
+  /* Hide scrollbar for all browsers */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
 }
