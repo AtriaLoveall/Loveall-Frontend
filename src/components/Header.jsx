@@ -20,23 +20,23 @@ export default function Header() {
   return (
     <header className="bg-[#71012D] text-white p-4 relative">
       <div className="container mx-auto flex justify-between items-center">
-        <a href="/" className="text-xl sm:text-2xl font-bold">
+        <Link to="/" className="text-xl sm:text-2xl font-bold">
           L❤VE ALL
-        </a>
+        </Link>
         <div className="hidden lg:flex items-center space-x-6">
           <nav>
             <ul className="flex space-x-4">
               <li>
-                <a href="/" className="hover:text-[#FF6B98]">Home</a>
+                <Link to="/" className="hover:text-[#FF6B98]">Home</Link>
               </li>
               <li>
-                <a href="/stores" className="hover:text-[#FF6B98]">Stores</a>
+                <Link to="/stores" className="hover:text-[#FF6B98]">Stores</Link>
               </li>
               <li>
-                <a href="/charity-media" className="hover:text-[#FF6B98]">Charity Media</a>
+                <Link to="/charity-media" className="hover:text-[#FF6B98]">Charity Media</Link>
               </li>
               <li>
-                <a href="/about" className="hover:text-[#FF6B98]">About us</a>
+                <Link to="/Linkbout" className="hover:text-[#FF6B98]">About us</Link>
               </li>
             </ul>
           </nav>
@@ -80,16 +80,16 @@ export default function Header() {
           <nav className="mb-4">
             <ul className="space-y-2">
               <li>
-                <a href="/" className="hover:text-[#FF6B98]">Home</a>
+                <Link to="/" className="hover:text-[#FF6B98]">Home</Link>
               </li>
               <li>
-                <a href="/stores" className="hover:text-[#FF6B98]">Stores</a>
+                <Link to="/stores" className="hover:text-[#FF6B98]">Stores</Link>
               </li>
               <li>
-                <a href="/charity-media" className="hover:text-[#FF6B98]">Charity Media</a>
+                <Link to="/charity-media" className="hover:text-[#FF6B98]">Charity Media</Link>
               </li>
               <li>
-                <a href="/about-us" className="hover:text-[#FF6B98]">About us</a>
+                <Link to="/about" className="hover:text-[#FF6B98]">About us</Link>
               </li>
             </ul>
           </nav>

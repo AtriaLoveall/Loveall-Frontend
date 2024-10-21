@@ -1,28 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 
-export default function TrendingOffers() {
+export default function TrendingOffers(props) {
   const [trendingOffers, setTrendingOffers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const scrollContainerRef = useRef(null);
 
   useEffect(() => {
-    const fetchTrendingOffers = async () => {
-      try {
-        setIsLoading(true);
-        const response = await axios.get('http://localhost:5000/api/trending-offers');
-        console.log('Fetched offers:', response.data);
-        setTrendingOffers(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching trending offers:', error);
-        setError(error.message || 'Failed to fetch offers');
-        setIsLoading(false);
-      }
-    };
-
-    fetchTrendingOffers();
+    setError(props.error);
+    setTrendingOffers(props.data)
+    setIsLoading(false);
   }, []);
 
   const scrollLeft = () => {

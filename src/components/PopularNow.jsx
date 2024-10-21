@@ -3,36 +3,17 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export default function PopularNow() {
+export default function PopularNow(props) {
   const [topStores, setTopStores] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchTopStores = async () => {
-      try {
-        console.log('Fetching top stores data...');
-        const response = await fetch('http://localhost:5000/api/top-discounts');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log('Top stores data fetched successfully:', data);
-        setTopStores(data);
-      } catch (error) {
-        console.error('Error fetching top stores:', error);
-        setError(error instanceof Error ? error.message : 'An unknown error occurred');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchTopStores();
+    setTopStores(props.data);
+    setError(props.error)
+    setIsLoading(false)
+    console.log(props.data)
   }, []);
-
-  const handleImageError = (e) => {
-    e.target.src = '/placeholder.svg';
-  };
 
   const settings = {
     dots: false,
@@ -89,13 +70,12 @@ export default function PopularNow() {
                       src={store.store_logo || '/placeholder.svg'}
                       alt={store.store_name}
                       className="w-full h-full object-contain p-2"
-                      onError={handleImageError}
                     />
                   </div>
                   <div className="text-center">
                     <span className="block mb-1 font-poppins text-[16px] font-semibold text-[#000000]">{store.store_name}</span>
                     <span className="block font-poppins text-[14px] font-semibold text-[#606060]">
-                      DISCOUNT {store.max_discount}%
+                      DISCOUNT {store.discount_percentage}%
                     </span>
                   </div>
                 </div>
