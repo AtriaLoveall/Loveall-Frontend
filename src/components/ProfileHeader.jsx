@@ -5,7 +5,6 @@ import { FiEdit2 } from 'react-icons/fi';
 export default function ProfileHeader() {
   return (
     <div className="relative bg-gradient-to-b from-[#71012D] to-[#971132] text-white overflow-hidden min-h-screen">
-      <Header />
       <div className="container mx-auto px-4 py-6 sm:py-8 md:py-12 relative z-10">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-5xl font-bold mb-6 sm:mb-8 md:mb-10 2xl:mb-8 text-center transition-all duration-300">
           Your Profile

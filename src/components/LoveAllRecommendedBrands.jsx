@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function LoveAllRecommendedBrands() {
+export default function LoveAllRecommendedBrands(props) {
   const [brands, setBrands] = useState([]);
   const [error, setError] = useState(null);
 
@@ -23,6 +23,13 @@ export default function LoveAllRecommendedBrands() {
 
     fetchBrands();
   }, []);
+  // console.log(props)
+  // setBrands(props.brand);
+  // setError(props.error);
+  // useEffect(() => {
+  //   console.log(brands)
+
+  // }, [brands])
 
   const handleImageError = (e, brandName) => {
     console.error(`Error loading image for ${brandName}`);

@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import LoyaltyCard from '../components/LoyaltyCard';
 import CategoryIcon from '../components/CategoryIcon';
 import LoveAllRecommendedBrands from '../components/LoveAllRecommendedBrands';
@@ -9,11 +9,44 @@ import { FiStar, FiShoppingBag, FiShoppingCart, FiCoffee, FiFilm, FiMap, FiMoreH
 import Login from '../components/Login';
 import PopUpContext from '../context/PopUpContext';
 import {useAuth} from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
   const {isAuthenticated} = useAuth();
   const {showLoginPopup, setShowLoginPopup} = useContext(PopUpContext)
   console.log("Authentication: " + isAuthenticated);
+  const homeApi = `${process.env.REACT_APP_API_URL}/user/home`;
+  const [brandData, setBrandData] = useState({});
+  const [featuredData, setFeaturedData] = useState({});
+  const [offerData, setOfferData] = useState({});
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  
+  const fetchHomeData = async () => {
+    try {
+      const response = await fetch(homeApi, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      if (response.ok) {
+        const result = await response.json();
+        setOfferData(result.data.offers);
+        setFeaturedData(result.data.featureOffers);
+        setBrandData(result.data.brand);
+        setError(result.error);
+        console.log(result.data);
+      }
+    } catch (error) {
+      setError(error)
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchHomeData();
+  }, []);
   // useEffect(() => {
   //   const timer = setTimeout(() => {
   //     if (!showLoginPopup) {
@@ -24,7 +57,7 @@ export default function Home() {
   // }, [showLoginPopup, setShowLoginPopup])
   return (
     <>
-      <div className="w-screen h-screen flex justify-center items-center fixed top-[60px] z-[20]">
+      <div className={`w-screen h-screen flex justify-center items-center fixed top-[60px] z-[20]`}>
         {showLoginPopup && !isAuthenticated && <Login className="bg-white"/>} 
       </div>
       <div className="min-h-screen flex flex-col font-poppins">
@@ -42,9 +75,9 @@ export default function Home() {
                   thanking you for being part of the Atria community.
                 </p>
                 <div className="flex space-x-4">
-                  <button className="bg-[#20B2AA] text-white px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base hover:bg-[#3CCBC5] transition-colors duration-300">
-                    Volunteer
-                  </button>
+                    <button className="bg-[#20B2AA] text-white px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base hover:bg-[#3CCBC5] transition-colors duration-300 cursor-pointer">
+                      Volunteer
+                    </button>
                   <button className="bg-[#20B2AA] text-white px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base hover:bg-[#3CCBC5] transition-colors duration-300">
                     Donate
                   </button>
@@ -76,9 +109,9 @@ export default function Home() {
                 <CategoryIcon Icon={FiMoreHorizontal} label="More" />
               </div>
             </div>
-            <LoveAllRecommendedBrands />
-            <PopularNow />
-            <TrendingOffers />
+            <LoveAllRecommendedBrands error={error}/>
+            <PopularNow  error={error} />
+            <TrendingOffers  error={error} />
             <Enquiry />
             {/* <Footer /> */}
           </div>
