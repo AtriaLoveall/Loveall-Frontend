@@ -18,6 +18,7 @@
     "js-cookie": "^3.0.5",
     "love-all-app": "file:",
     "lucide-react": "^0.452.0",
+    "next": "^15.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
