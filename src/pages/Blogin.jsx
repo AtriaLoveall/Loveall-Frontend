@@ -3,10 +3,13 @@ import { login, forgetpassword, sendOtp, changePasswordAPI } from './apiService'
 
 const SuccessPopup = ({ onClose }) => (
   <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-    <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-      <img src="https://via.placeholder.com/150" alt="Success" className="w-32 mb-4" />
-      <h2 className="text-lg font-bold">Password Reset Successful!</h2>
-      <p>Your password has been reset successfully. You can now log in with your new password.</p>
+    <div className="bg-white p-6 rounded-lg shadow-lg text-center ">
+    <div class="flex justify-center items-center ">
+    <img src="https://optimworks.com/wp-content/uploads/2022/05/Cyber-Security-Testing.png" alt="Success" class="w-32 mb-4" />
+</div>
+
+      <h2 className="text-lg font-bold">Password Updated!</h2>
+      <p>Your password has been successfully changed.<br></br> You can now access all the features of your business account using your new password.</p>
       <button
         onClick={onClose}
         className="mt-4 bg-[#8B1539] text-white py-2 px-4 rounded"
@@ -229,7 +232,7 @@ export default function LoginForm() {
                   <input
                     id="password"
                     type="password"
-                    placeholder="Temporary Password"
+                    placeholder="Password"
                     className="w-full rounded-lg p-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#8B1539]"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -333,9 +336,9 @@ export default function LoginForm() {
             )}
 
             <div className="text-center space-y-4">
-              <a href="/login-otp" className="text-[#8B1539] hover:underline block text-sm">
+              {/* <a href="/login-otp" className="text-[#8B1539] hover:underline block text-sm">
                 Log in with OTP
-              </a>
+              </a> */}
 
               <div className="text-sm">
                 Don&apos;t have an account?{' '}

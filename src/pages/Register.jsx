@@ -142,7 +142,7 @@ export default function Component() {
 
         <div className="w-full max-w-md p-8 bg-white rounded-3xl shadow-lg">
           <h2 className="text-2xl font-bold text-center mb-6 text-red-500">Registration</h2>
-          
+
           <form onSubmit={handleSubmit} className="space-y-6">
             {currentStep === 1 && (
               <>
@@ -423,7 +423,7 @@ export default function Component() {
                   <h3 className="text-lg font-medium leading-6 text-gray-900" id="modal-title">
                     Registration Successful!
                   </h3>
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin:'10px'}}>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '10px' }}>
                     <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR4auj-GjvRkoUt6bMVrIX9mD0qlLV9tS-7PR2mI9NosuhkFbBm" alt="Sucessfulogo" />
                   </div>
                   <div className="mt-2">
@@ -433,21 +433,22 @@ export default function Component() {
                   </div>
                 </div>
                 <div className="flex justify-center mt-4">
-                  <button 
-                    onClick={closeSuccessModal}
-                    
-                    
+                  <button
+                    onClick={() => {
+                      closeSuccessModal(); // Close the modal
+                      window.location.href = "/login"; // Navigate to /login
+                    }}
                     className="px-4 py-2 text-sm font-medium text-white bg-[#8B1539] rounded-md hover:bg-[#6d102c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#8B1539]"
                   >
-                    <a href="/login">Done</a>
-                    
+                    Done
                   </button>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-       
+
       )}
     </div>
   )
