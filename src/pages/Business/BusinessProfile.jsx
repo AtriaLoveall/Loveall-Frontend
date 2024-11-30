@@ -6,7 +6,7 @@ import BusinessProfileHeader from '../../components/BusinessProfileHeader';
 const BusinessProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    businessName: 'fuckall',
+    businessName: 'loveall',
     address: '456 MG Road, Bangalore',
     city: 'Bangalore',
     state: 'Karnataka',

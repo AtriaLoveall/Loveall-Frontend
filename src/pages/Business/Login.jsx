@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { login, forgetpassword, sendOtp, changePasswordAPI } from '../../service/authentication.js';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const SuccessPopup = ({ onClose }) => (
   <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
@@ -132,12 +133,14 @@ export default function LoginForm() {
   const [successMessage, setSuccessMessage] = useState('');
   const [isSuccessPopupVisible, setIsSuccessPopupVisible] = useState(false);
   const [isChangePasswordPopupVisible, setIsChangePasswordPopupVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await login(email, password);
-      alert(response.message); // Assuming response.message contains the success message
+      navigate('/business')
+      
     } catch (error) {
       setErrorMessage(error.message || 'Login failed. Please check your credentials.');
       if (error.message === "Kindly change your password.") {

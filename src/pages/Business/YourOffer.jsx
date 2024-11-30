@@ -32,11 +32,12 @@ const YourOffers = () => {
         <div className="border rounded-lg p-6">
           <div className="flex items-start gap-8">
             <div className="w-2/5">
-              <img
+              {/* <img
                 src={storeImage}
                 alt="Store illustration"
                 className="w-full aspect-square object-cover"
-              />
+              /> */}
+              <div className="w-full aspect-square object-cover bg-[#53031f]"></div>
             </div>
             <div className="w-3/5">
               <div className="mb-4">
@@ -81,11 +82,12 @@ const YourOffers = () => {
         <div className="border rounded-lg p-6">
           <div className="flex items-start gap-8">
             <div className="w-2/5">
-              <img
+              {/* <img
                 src={storeImage}
                 alt="Store illustration"
                 className="w-full aspect-square object-cover"
-              />
+              /> */}
+              <div className="w-full aspect-square object-cover bg-[#53031f]"></div>
             </div>
             <div className="w-3/5">
               <div className="mb-4">

@@ -1,4 +1,6 @@
 import React from 'react';
+import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const KeyIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,6 +62,8 @@ const DeviceCard = ({ icon, name, lastUsed, onLogout }) => (
 );
 
 const Security = () => {
+  const {logout} = useAuth();
+  const navigate = useNavigate();
   const handleChangePassword = () => {
     console.log('Change password clicked');
   };
@@ -69,7 +73,8 @@ const Security = () => {
   };
 
   const handleLogoutAll = () => {
-    console.log('Logging out from all devices');
+    logout();
+    navigate('/');
   };
 
   return (
