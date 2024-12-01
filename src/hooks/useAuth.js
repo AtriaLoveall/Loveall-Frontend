@@ -54,14 +54,13 @@ export const AuthProvider = ({ children }) => {
           password: payload.password,
         }),
       });
+      const data = await response.json();
 
       if (response.ok) {
-        const data = await response.json();
         console.log('Registration successful:', data);
         // navigate('/registration2');
       } else {
-        const errorData = await response.json();
-        alert(`Registration failed: ${errorData.message}`);
+        alert(`Registration failed: ${data.message}`);
       }
     } catch (error) {
       console.error('Error during registration:', error);
@@ -69,8 +68,36 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const sendOtp = async (payload) => {
+    const sendOtpAPi = api + '/auth/send-otp'
+    let data;
+    try {
+      const response = await fetch(sendOtpAPi, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: payload.email
+        })
+      })
+      data = await response.json();
+      if (response.ok) {
+        console.log('OTP send successfully');
+      }
+      else {
+        console.log(`Failed: ${data.message}`)
+      }  
+    } catch (error) {
+      console.error('Error during Login with otp:', error);
+      alert('An error occurred during Login. Please try again.');
+    } finally {
+      return data;
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, register }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, register, sendOtp }}>
       {children}
     </AuthContext.Provider>
   );
