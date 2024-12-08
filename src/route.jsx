@@ -28,6 +28,7 @@ import YourOffers from "./pages/Business/YourOffer";
 import Analytics from "./pages/Business/Analytics";
 import Feedback from "./pages/Business/Feedback";
 import BusinessTransaction from "./pages/Business/Transaction";
+import Admin from "./pages/Admin/admin";
 
 const AppRoute = () => {
   return (
@@ -70,6 +71,8 @@ const AppRoute = () => {
         <Route path="security" element={<Security />} />
         <Route path="support" element={<CustomerSupport />} />
       </Route>
+
+      <Route path="/admin" element={<Admin />} />
 
       {/* 404 - Not Found */}
       <Route path="*" element={<NotFound />} />
