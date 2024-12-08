@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
-import Registration2 from "./pages/ToRegister";
 import OTPSent from "./pages/OTPSent";
 import Offer from "./pages/Offer";
 import SingleOffer from "./pages/singleOffer";
@@ -22,8 +21,6 @@ import CustomerSupport from "./pages/CustomerSupport";
 import LoyaltyCardProfile from "./pages/LoyaltyCardProfile";
 import PaymentPage from "./pages/PaymentPage";
 import Transaction from "./pages/Transaction";
-import BusinessRegister from "./pages/Business/Register";
-import BusinessLogin from "./pages/Business/Login";
 import Business from "./pages/Business/Business";
 import BusinessDashboard from "./pages/Business/Dashboard";
 import BusinessProfile from "./pages/Business/BusinessProfile";
@@ -43,12 +40,9 @@ const AppRoute = () => {
         <Route path="feedback" element={<Feedback />} />
         <Route path="transactions" element={<BusinessTransaction />} />
       </Route>
-      <Route path="/business/register" element={<BusinessRegister />} />
-      <Route path="/business/login" element={<BusinessLogin />} />
       <Route path="/" element={<Home />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/toregister" element={<Registration2 />} />
       <Route path="/otp-sent" element={<OTPSent />} />
       <Route path="/stores" element={<Offer />} />
       <Route path="/offer/:offer_id" element={<SingleOffer />} />

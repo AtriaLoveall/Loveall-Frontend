@@ -35,7 +35,7 @@ const EditPersonalInfo = () => {
     const fetchUserData = async () => {
       try {
         const token = getToken();
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/profile/edit-personal-info`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/user/profile`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -72,7 +72,7 @@ const EditPersonalInfo = () => {
     e.preventDefault();
     try {
       const token = getToken();
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/profile/edit-personal-info`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/user/profile`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

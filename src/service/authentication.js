@@ -1,7 +1,7 @@
 // src/apiService.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/Buss'; // Replace with your backend URL
+const API_URL = 'http://localhost:3000/api/business'; // Replace with your backend URL
 
 export const registerBusiness = async (data) => {
   try {

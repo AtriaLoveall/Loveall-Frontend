@@ -73,7 +73,7 @@ const Security = () => {
   };
 
   const handleLogoutAll = () => {
-    logout();
+    logout("user");
     navigate('/');
   };
 

@@ -41,7 +41,7 @@ const Account = () => {
     const fetchUserData = async () => {
       try {
         const token = getToken();
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/profile/account`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/user/profile`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -51,7 +51,6 @@ const Account = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch user data');
         }
-        console.log('Fetched user data:', userData);
         const data = await response.json();
         setUserData(data);
       } catch (err) {

@@ -2,8 +2,9 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { registerBusiness, sendOtp, verifyOtp } from '../../service/authentication.js'; // Import the API functions
+import { MoveLeft } from "lucide-react";
 
-export default function BusinessRegister() {
+export default function BusinessRegister({setShowPage}) {
   const [formData, setFormData] = useState({
     businessName: "",
     email: "",
@@ -123,6 +124,12 @@ export default function BusinessRegister() {
   return (
     <div className="min-h-screen flex flex-col items-center p-6 bg-white">
       <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center gap-12">
+      <button 
+          onClick={() => setShowPage(1)} 
+          className="absolute top-4 left-4 text-gray-400 hover:text-gray-600"
+        >
+          <MoveLeft />
+        </button>
         <div className="flex-1 text-center lg:text-left">
           <h1 className="text-4xl font-bold mb-4">
             Welcome to <span className="text-[#8B1539]">Love All!</span>
@@ -436,7 +443,7 @@ export default function BusinessRegister() {
                   <button
                     onClick={() => {
                       closeSuccessModal(); // Close the modal
-                      window.location.href = "/business/login"; // Navigate to /login
+                      window.location.href = "/"; // Navigate to /login
                     }}
                     className="px-4 py-2 text-sm font-medium text-white bg-[#8B1539] rounded-md hover:bg-[#6d102c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#8B1539]"
                   >

@@ -4,7 +4,7 @@ import { getToken, removeToken, setToken } from "../utils/tokenManager";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!getToken());
+  const [isAuthenticated, setIsAuthenticated] = useState(!!getToken('user_auth_token'));
   const api = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
@@ -23,7 +23,12 @@ export const AuthProvider = ({ children }) => {
       console.log(data);
       if (data.success) {
         const auth_token = data.token;
-        setToken({ rememberMe, auth_token });
+        let token;
+        console.log(auth_token)
+        if (data.redirectTo === "/") token = 'user_auth_token';
+        else if (data.redirectTo === "/business") token = 'business_auth_token';
+        else if (data.redirectTo === "/admin") token = 'admin_auth_token';
+        setToken({ rememberMe, auth_token, token});
         setIsAuthenticated(true);
       }
       return { message: data.message, redirectTo: data.redirectTo, success: data.success };
@@ -33,8 +38,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = async () => {
-    removeToken();
+  const logout = async (type) => {
+    let token;
+    if (type === 'user') token = 'user_auth_token';
+    else if (type === 'business') token = 'business_auth_token';
+    else if (type === 'admin') token = 'admin_auth_token';
+    removeToken(token);
     setIsAuthenticated(false);
   };
 

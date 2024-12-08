@@ -34,11 +34,12 @@ const Login = ({ className }) => {
       email,
       password,
       rememberMe,
-      otp: otp.join(''),
+      otp: otp.join('')
     });
     setMessage(message);
     if (success) {
       handlePopUp();
+      navigate(redirectTo);
     }
   };
 
@@ -247,11 +248,11 @@ const Login = ({ className }) => {
 
       <p className="mt-2 text-center text-sm text-gray-900 font-medium">
         Don't have an account?{" "}
-        <button
+        <Link to="/register"
           className="font-medium text-red-600 hover:text-red-500"
         >
           Create Account
-        </button>
+        </Link>
       </p>
     </div>
   );
