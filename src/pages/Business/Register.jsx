@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { registerBusiness, sendOtp, verifyOtp } from '../../service/authentication.js'; // Import the API functions
 import { MoveLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function BusinessRegister({setShowPage}) {
   const [formData, setFormData] = useState({
@@ -349,9 +350,9 @@ export default function BusinessRegister({setShowPage}) {
 
             <p className="text-center text-sm">
               Already a member?{" "}
-              <a href="/business/login" className="text-[#8B1539] hover:underline">
+              <Link to="/" className="text-[#8B1539] hover:underline">
                 Login
-              </a>
+              </Link>
             </p>
           </form>
         </div>

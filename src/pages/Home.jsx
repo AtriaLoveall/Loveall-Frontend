@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
-  const { showLoginPopup } = useContext(PopUpContext);
+  const { showLoginPopup, setShowLoginPopup } = useContext(PopUpContext);
   const homeApi = `${process.env.REACT_APP_API_URL}/user/home`;
   const [brandData, setBrandData] = useState({});
   const [featuredData, setFeaturedData] = useState({});
@@ -51,6 +51,15 @@ export default function Home() {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    // Set a timer to update `showLoginPopUp` after 10 seconds
+    const timer = setTimeout(() => {
+      setShowLoginPopup(true);
+    }, 1000);
+
+    // Cleanup the timer when the component unmounts
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     fetchHomeData();
